@@ -1,20 +1,28 @@
-﻿using Azure;
-using Azure.AI.Inference;
+﻿using Azure.AI.OpenAI;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
+using System.ClientModel;
 using System.Text;
 
-var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-if(string.IsNullOrEmpty(githubToken))
-{
-    var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-    githubToken = config["GITHUB_TOKEN"];
-}
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(AppContext.BaseDirectory)
+    .AddUserSecrets<Program>()  // 'Program' can be any class in your assembly
+    .Build();
 
-IChatClient client = new ChatCompletionsClient(
-        endpoint: new Uri("https://models.inference.ai.azure.com"),
-        new AzureKeyCredential(githubToken))
-        .AsChatClient("Phi-3.5-MoE-instruct");
+var deploymentName = configuration["AZURE_OPENAI_DEPLOYMENT"] ??
+    Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");
+
+var endpoint = new Uri((configuration["AZURE_OPENAI_ENDPOINT"] ??
+    Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT"))!); // e.g. "https://< your hub name >.openai.azure.com/"
+
+var apiKey = new ApiKeyCredential(
+    (configuration["AZURE_AI_SECRET"] ?? Environment.GetEnvironmentVariable("AZURE_AI_SECRET"))!
+    );
+
+IChatClient client = new AzureOpenAIClient(
+    endpoint,
+    apiKey)
+.AsChatClient(deploymentName!);
 
 // here we're building the prompt
 StringBuilder prompt = new StringBuilder();
