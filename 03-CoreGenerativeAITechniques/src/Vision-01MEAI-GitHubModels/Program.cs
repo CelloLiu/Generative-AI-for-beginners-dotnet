@@ -1,21 +1,26 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Azure.AI.OpenAI;
 using Microsoft.Extensions.AI;
-using Azure.AI.Inference;
-using Azure;
+using Microsoft.Extensions.Configuration;
+using System.ClientModel;
 
-var githubToken = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-if (string.IsNullOrEmpty(githubToken))
-{
-    var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-    githubToken = config["GITHUB_TOKEN"];
-}
+var configuration = new ConfigurationBuilder()
+    .AddUserSecrets<Program>()  // 'Program' can be any class in your assembly
+    .Build();
 
-IChatClient chatClient =
-    new ChatCompletionsClient(
-        endpoint: new Uri("https://models.inference.ai.azure.com"),
-        new AzureKeyCredential(githubToken))
-        .AsChatClient("gpt-4o-mini");
+var deploymentName = configuration["AZURE_OPENAI_DEPLOYMENT"] ??
+    Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");
 
+var endpoint = new Uri((configuration["AZURE_OPENAI_ENDPOINT"] ??
+    Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT"))!); // e.g. "https://< your hub name >.openai.azure.com/"
+
+var apiKey = new ApiKeyCredential(
+    (configuration["AZURE_AI_SECRET"] ?? Environment.GetEnvironmentVariable("AZURE_AI_SECRET"))!
+    );
+
+IChatClient chatClient = new AzureOpenAIClient(
+    endpoint,
+    apiKey)
+.AsChatClient(deploymentName!);
 
 // images
 string imgRunningShoes = "running-shoes.jpg";
@@ -34,7 +39,6 @@ var prompt = promptDescribe;
 string imageFileName = imgRunningShoes;
 string image = Path.Combine(Directory.GetCurrentDirectory(), "images", imageFileName);
 
-
 List<ChatMessage> messages =
 [
     new ChatMessage(Microsoft.Extensions.AI.ChatRole.System, systemPrompt),
@@ -44,7 +48,7 @@ List<ChatMessage> messages =
 // read the image bytes, create a new image content part and add it to the messages
 AIContent aic = new DataContent(File.ReadAllBytes(image), "image/jpeg");
 var message = new ChatMessage(Microsoft.Extensions.AI.ChatRole.User, [aic]);
-    messages.Add(message);
+messages.Add(message);
 
 // send the messages to the assistant
 var response = await chatClient.GetResponseAsync(messages);
