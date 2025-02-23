@@ -5,7 +5,7 @@ using System.ClientModel;
 using System.Text;
 
 var configuration = new ConfigurationBuilder()
-    .SetBasePath(AppContext.BaseDirectory)
+    //.SetBasePath(AppContext.BaseDirectory)
     .AddUserSecrets<Program>()  // 'Program' can be any class in your assembly
     .Build();
 
