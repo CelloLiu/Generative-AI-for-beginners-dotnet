@@ -2,7 +2,7 @@
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.Translation;
 using Microsoft.Extensions.Configuration;
-
+using System.Text;
 
 // get key and region
 string? speechKey = Environment.GetEnvironmentVariable("SPEECH_KEY");
@@ -16,10 +16,12 @@ if (string.IsNullOrEmpty(speechKey) || string.IsNullOrEmpty(speechRegion))
 
 var speechTranslationConfig = SpeechTranslationConfig.FromSubscription(speechKey, speechRegion);
 speechTranslationConfig.SpeechRecognitionLanguage = "en-US";
-speechTranslationConfig.AddTargetLanguage("es-ES");
+speechTranslationConfig.AddTargetLanguage("zh-Hans");
 
 using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
 using var translationRecognizer = new TranslationRecognizer(speechTranslationConfig, audioConfig);
+
+Console.OutputEncoding = Encoding.UTF8;
 
 Console.WriteLine("Speak into your microphone.");
 var translationRecognitionResult = await translationRecognizer.RecognizeOnceAsync();
