@@ -11,9 +11,11 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
+        var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+
         // First, we create a client according to configured environment variables (see end of file) and then start
         // a new conversation session.
-        RealtimeConversationClient client = GetConfiguredClient();
+        RealtimeConversationClient client = GetConfiguredClient(config);
         using RealtimeConversationSession session = await client.StartConversationSessionAsync();
 
         // We'll add a simple function tool that enables the model to interpret user input to figure out when it
@@ -118,18 +120,16 @@ public class Program
         }
     }
 
-    private static RealtimeConversationClient GetConfiguredClient()
+    private static RealtimeConversationClient GetConfiguredClient(IConfigurationRoot config)
     {
         string? aoaiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT");
         string? aoaiUseEntra = Environment.GetEnvironmentVariable("AZURE_OPENAI_USE_ENTRA");
-        string? aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT");
+        string? aoaiDeployment = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT"); // such as sth. like gpt-4o-realtime
         string? aoaiApiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY");
         string? oaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
-
         if (string.IsNullOrEmpty(aoaiEndpoint))
         {
-            var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
             aoaiEndpoint = config["AZURE_OPENAI_ENDPOINT"];
             aoaiUseEntra = config["AZURE_OPENAI_USE_ENTRA"];
             aoaiDeployment = config["AZURE_OPENAI_DEPLOYMENT"];
