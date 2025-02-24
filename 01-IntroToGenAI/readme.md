@@ -84,7 +84,7 @@ Additionally, the library supports middleware components for functionalities lik
 
 ![*Figure: Microsoft.Extensions.AI (MEAI) library.*](./images/meai-architecture-diagram.png)
 
-Using an unified API, MEAI allows developers to work with different AI services, such as Azure AI Inference, Ollama, and OpenAI, in a consistent manner. This simplifies the integration of AI models into .NET applications, adding flexibility for developers to choose the best AI services for their projects and specific requirements.
+Using a unified API, MEAI allows developers to work with different AI services, such as Azure AI Inference, Ollama, and OpenAI, in a consistent manner. This simplifies the integration of AI models into .NET applications, adding flexibility for developers to choose the best AI services for their projects and specific requirements.
 
 > 🏎️ **Quick start**: For a quick start with MEAI, [check out the blog post](https://devblogs.microsoft.com/dotnet/introducing-microsoft-extensions-ai-preview/).
 >

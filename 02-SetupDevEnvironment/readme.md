@@ -33,11 +33,28 @@ Here's a quick rundown of the services:
 > - **Azure OpenAI** have your eye? [This is the document for you](getting-started-azure-openai.md).
 > - **Ollama** your choice? [This guide has the info you need](getting-started-ollama.md).
 
+### **NOTE for local models with Ollama:**
+
+The Ollama Codespace will provision all the necessary models that you need. However, if you are working in local mode, once you have installed Ollama, you need to pull the models for the lessons you want to run.
+
+- For lesson "**02 - Setting Up for .NET Development with Generative AI**" and project [MEAIFunctionsOllama](https://github.com/microsoft/Generative-AI-for-beginners-dotnet/tree/main/02-SetupDevEnvironment/src/BasicChat-03Ollama) you need to pull model [llama3.2](https://ollama.com/library/llama3.2)  by entering in terminal
+
+```bash
+ollama pull llama3.2
+```
+
+- For lesson "**03 - Core Generative AI Techniques with .NET**", when running the ollama projects like [RAGSimple-10SKOllama](https://github.com/microsoft/Generative-AI-for-beginners-dotnet/tree/main/03-CoreGenerativeAITechniques/src/RAGSimple-10SKOllama),  you need to pull the models [all-minilm](https://ollama.com/library/all-minilm) and [phi3.5](https://ollama.com/library/phi3.5) by entering in terminal:
+
+```bash
+ollama pull phi3.5
+ollama pull all-minilm
+```
+
 ## Learn and test AI models with GitHub Models
 
 **GitHub Models** provides an intuitive way to experiment with various AI models directly within your development environment. This feature allows developers to test and interact with different models, understanding their capabilities and limitations before implementation. Through a simple interface, you can explore model responses, evaluate performance, and determine the best fit for your application requirements. Hosted within GitHub's infrastructure, these models offer reliable access and consistent performance, making them ideal for development and testing phases. Best of all, there is a free tier to start your exploration without any cost.
 
-![Image for GitHub Models page, demonstrating multiple generative AI models](./images/github-models-webapge.png)
+![Image for GitHub Models page, demonstrating multiple generative AI models](./images/github-models-webpage.png)
 
 ## Pre-flight check: Setting up GitHub Access Tokens
 

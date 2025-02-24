@@ -23,7 +23,7 @@ There are 2 main phases in a RAG architecture: **Retrieval** and **Generation**.
 
 ## Embeddings!
 
-We've held off as long as we could to introduce the concept of embeddings. In the retrieval phase of RAG we do not want to pass the entire data store to the model to generate the response. We only want to grab the most relevant information. 
+We've held off as long as we could to introduce the concept of embeddings. In the retrieval phase of RAG we do not want to pass the entire data store to the model to generate the response. We only want to grab the most relevant information.
 
 So we need a way to compare the user's prompt with the data in the knowledge store. So we can pull out the minimum amount of information needed to augment the prompt.
 
@@ -33,7 +33,7 @@ You may have heard of vector databases. These are databases that store data in a
 
 ## Implementing RAG
 
-We'll use the Microsoft.Extension.AI along with the [Microsoft.Extensions.VectorData](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions/) and [Microsoft.SemanticKernel.Connectors.InMemory](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) libraries to implement RAG below. 
+We'll use the Microsoft.Extension.AI along with the [Microsoft.Extensions.VectorData](https://www.nuget.org/packages/Microsoft.Extensions.VectorData.Abstractions/) and [Microsoft.SemanticKernel.Connectors.InMemory](https://www.nuget.org/packages/Microsoft.SemanticKernel.Connectors.InMemory) libraries to implement RAG below.
 
 > 🧑‍💻**Sample code:** You can follow along with the [sample code here](../03-CoreGenerativeAITechniques/src/RAGSimple-02MEAIVectorsMemory/).
 > 

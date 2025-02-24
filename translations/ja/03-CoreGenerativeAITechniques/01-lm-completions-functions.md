@@ -132,7 +132,7 @@ MEAIを使用して関数を呼び出すには、いくつかの設定手順が�
         return $"The weather is {temperature} degrees C and {conditions}.";
     }
 
-```
+    ```
 
 2. 次に、MEAIに利用可能な関数を指定するための `ChatOptions` オブジェクトを作成します。
 
@@ -143,7 +143,7 @@ MEAIを使用して関数を呼び出すには、いくつかの設定手順が�
         Tools = [AIFunctionFactory.Create(GetTheWeather)]
     };
 
-```
+    ```
 
 3. `IChatClient` オブジェクトをインスタンス化する際に、関数呼び出しを使用することを指定します。
 

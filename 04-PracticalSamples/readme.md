@@ -83,7 +83,7 @@ if (builder.ExecutionContext.IsPublishMode)
 }
 ```
 
-The code above demonstrates how to add the Azure Application Insights for monitoring, the Azure OpenAI for the chat and embeddings deployments, and the embedding used for the vector entities. 
+The code above demonstrates how to add the Azure Application Insights for monitoring, the Azure OpenAI for the chat and embeddings deployments, and the embedding used for the vector entities.
 
 For embedding and AOAI creation, it can be found at the product container, as follows:
 
@@ -366,7 +366,7 @@ await foreach (var delta in session.ProcessStreamingRequest(createWriterRequest)
 }
 ```
 
-The type `CreateWriterRequest` needs to have three properties: `Research`, `Products`, and `Writing`. After getting them setted by processing the request, it calls the `CreateSessionAsync` method, which looks like this:
+The type `CreateWriterRequest` needs to have three properties: `Research`, `Products`, and `Writing`. After getting them set by processing the request, it calls the `CreateSessionAsync` method, which looks like this:
 
 ```csharp
 internal async Task<CreativeWriterSession> CreateSessionAsync(HttpResponse response)

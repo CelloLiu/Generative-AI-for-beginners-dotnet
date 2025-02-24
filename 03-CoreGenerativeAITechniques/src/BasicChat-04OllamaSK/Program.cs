@@ -28,7 +28,7 @@ while (true)
 
     var sb = new StringBuilder();
     var result = chat.GetStreamingChatMessageContentsAsync(history);
-    Console.Write("AI: ");
+    Console.Write($"AI [{modelId}]: ");
     await foreach (var item in result)
     {
         sb.Append(item);

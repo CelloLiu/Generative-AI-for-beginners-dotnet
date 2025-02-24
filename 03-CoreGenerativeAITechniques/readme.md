@@ -7,10 +7,10 @@ In this lesson you'll learn some practical skills for building AI-enabled .NET a
 #### What you'll learn in this lesson:
 
 - 🌟 LLM completions and chat flows
-- 🔗 Functions & plugins with LLMs  
-- 🔎 Retrieval-Augmented Generation (RAG)  
-- 👀 Vision-based AI approaches  
-- 🔊 Audio creation and transcription  
+- 🔗 Functions & plugins with LLMs
+- 🔎 Retrieval-Augmented Generation (RAG)
+- 👀 Vision-based AI approaches
+- 🔊 Audio creation and transcription
 - 🧩 Agents & assistants
 
 For this lesson, we will subdivide the content into the following sections:
